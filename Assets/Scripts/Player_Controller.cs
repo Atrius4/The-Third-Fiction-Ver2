@@ -10,6 +10,7 @@ public class Player_Controller : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] Animator animator;
+    public AudioSource shootSound;
 
     // ---- MOVEMENT Variables ----
 
@@ -78,7 +79,7 @@ public class Player_Controller : MonoBehaviour
         xpBar.slider.value = 0;
         lvlManager.SetLevel(level);
         hasDoubleJump = false;
-
+        shootSound = GetComponent<AudioSource>();
         
     }
 
@@ -182,11 +183,15 @@ public class Player_Controller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z) && moveInput == 0 )
         {
             animator.SetBool("shooting", true);
+            shootSound.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+            shootSound.Play();
         }
         else if (Input.GetKeyDown(KeyCode.Z) && moveInput != 0)
         {
             ShootTimeCounter = shootTime;
             animator.SetBool("runShooting", true);
+            shootSound.pitch = UnityEngine.Random.Range(1.2f, 1.35f);
+            shootSound.Play();
         }
 
         if (Input.GetKey(KeyCode.Z) && movement.x != 0)
