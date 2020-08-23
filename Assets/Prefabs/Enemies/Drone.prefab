@@ -108,11 +108,11 @@ MonoBehaviour:
   State: 0
   Bullet: {fileID: 2427605282119029931, guid: 7d29a1f2b8482f247b10c1c070f3f678, type: 3}
   Gun: {fileID: 1846102053872310385}
-  DelayTime: 2
+  DelayTime: 0.5
   Target: {x: 0, y: 0, z: 0}
   Direction: {x: 0, y: 0, z: 0}
   Angle: 0
-  offSet: 1
+  offSet: 0
   anim: {fileID: 0}
   Timer: 0
 --- !u!1 &1846102053229253573
