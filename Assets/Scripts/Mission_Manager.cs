@@ -37,12 +37,13 @@ public class Mission_Manager : MonoBehaviour
             enemyCount++;
             enemyText.text = enemyCount.ToString();
         }
+
         if (enemyCount == 8)
         {
             checkEnemy.enabled = true;
             mission++;
         }
-        if (player.GetComponent<CollectablesManager>().coins == 4)
+        if (player.GetComponent<CollectablesManager>().coins == 45)
         {
             checkCoins.enabled = true;
             mission++;

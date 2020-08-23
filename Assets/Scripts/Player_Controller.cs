@@ -12,6 +12,7 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] Animator animator;
     public AudioSource shootSound;
 
+
     // ---- MOVEMENT Variables ----
 
     private float moveInput;
@@ -57,6 +58,7 @@ public class Player_Controller : MonoBehaviour
     public int xpToNextLevel;
     public Level_Manager lvlManager;
     public int level;
+    public int enemyCount;
 
     // ---- Check Point Variables ----
     public Vector3 respawnPoint;
