@@ -12,6 +12,8 @@ TagManager:
   - Checkpoint
   - FallHazard
   - PowerUpJump
+  - Coin
+  - Enemy
   layers:
   - Default
   - TransparentFX

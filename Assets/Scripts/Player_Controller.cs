@@ -36,7 +36,7 @@ public class Player_Controller : MonoBehaviour
     public int extraJumpsValue;
     public float secondJumpForce;
 
-    private bool hasDoubleJump;
+    public bool hasDoubleJump;
 
     // ---- DASH Variables ----
 
@@ -163,7 +163,7 @@ public class Player_Controller : MonoBehaviour
             {
                 rb.velocity = Vector2.left * dashForce;
                 canDash = false;
-                Invoke("cooldownDash", 2);
+                Invoke("cooldownDash", 1);
             }
         }
 
