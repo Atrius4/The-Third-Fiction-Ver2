@@ -27,7 +27,6 @@ public class Mission_Manager : MonoBehaviour
         checkDoubleJump.enabled = false;
         checkEnemy.enabled = false;
         checkCoins.enabled = false;
-        levelComplete.enabled = false;
     }
 
     // Update is called once per frame
@@ -43,7 +42,7 @@ public class Mission_Manager : MonoBehaviour
             checkEnemy.enabled = true;
             mission++;
         }
-        if (player.GetComponent<CollectablesManager>().coins == 40)
+        if (player.GetComponent<CollectablesManager>().coins == 4)
         {
             checkCoins.enabled = true;
             mission++;
@@ -53,10 +52,7 @@ public class Mission_Manager : MonoBehaviour
             checkDoubleJump.enabled = true;
             mission++;
         }
-        if (mission == 3)
-        {
-            levelComplete.enabled = true;
-        }
+
 
     }
 
