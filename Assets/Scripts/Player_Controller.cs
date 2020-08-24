@@ -181,7 +181,7 @@ public class Player_Controller : MonoBehaviour
 
         // -> Shooting
 
-        if (Input.GetKeyDown(KeyCode.Z) && moveInput == 0 )
+        if (Input.GetKeyDown(KeyCode.Z) && moveInput == 0)
         {
             animator.SetBool("shooting", true);
             shootSound.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
@@ -261,8 +261,6 @@ public class Player_Controller : MonoBehaviour
         // ---- End XP and Lvl Controller ----
 
         // -> Inventory Use
-
-      
     }
 
     void FixedUpdate()
@@ -360,6 +358,7 @@ public class Player_Controller : MonoBehaviour
         }
 
     }
+
 
     public void AdEnemy()
     {

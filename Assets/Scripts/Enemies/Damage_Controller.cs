@@ -26,6 +26,8 @@ public class Damage_Controller : MonoBehaviour
 
             VecDif = EnemyObject.transform.position - ColliderPlayer.transform.position;
             PlayerRB.AddForce(VecDif.normalized * PunchForce * -1);
+
+            ColliderPlayer.GetComponent<DamageIndicator>().Damaged();
         }
     }
 }
