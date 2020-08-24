@@ -17,4 +17,10 @@ public class CollectablesManager : MonoBehaviour
             coinsText.text = coins.ToString();
         }
     }
+
+    public void BuyItemCost(int itemCost)
+    {
+        coins -= itemCost;
+        coinsText.text = coins.ToString();
+    }
 }

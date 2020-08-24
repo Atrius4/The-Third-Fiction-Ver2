@@ -240,6 +240,13 @@ public class Player_Controller : MonoBehaviour
 
 
         // ---- End XP and Lvl Controller ----
+
+        // -> Inventory Use
+      /*  if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+
+        }
+      */
     }
 
     void FixedUpdate()
@@ -337,7 +344,6 @@ public class Player_Controller : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-
 
 
 
