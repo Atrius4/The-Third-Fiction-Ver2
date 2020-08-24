@@ -5,6 +5,7 @@ using UnityEngine;
 public class Slot : MonoBehaviour
 {
     private Inventory inventory;
+    private GameObject item;
     [SerializeField] private int i;
 
     private void Start()
@@ -18,6 +19,23 @@ public class Slot : MonoBehaviour
         {
             inventory.isFull[i] = false;
         }
+
+        /*if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            UseItem(0);
+        }*/
+
+    }
+
+    /*public void UseItem(int slot)
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.CompareTag("HealthPotion"))
+            {
+                Debug.Log("Curar");
+            }
+        }
     }
 
     public void DestroyItem()
@@ -26,7 +44,7 @@ public class Slot : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
-    }
+    }*/
 
 
 

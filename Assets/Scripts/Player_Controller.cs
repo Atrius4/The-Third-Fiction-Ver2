@@ -68,7 +68,7 @@ public class Player_Controller : MonoBehaviour
     public Vector3 respawnPoint;
 
     // ---- Shop & Inventory Variables ----
-
+    public Slot slot1;
 
     // ----------------------------------------------------------- CODE ---------------------------------------------------------------------
 
@@ -86,6 +86,7 @@ public class Player_Controller : MonoBehaviour
         hasDoubleJump = false;
         shootSound = GetComponent<AudioSource>();
         lifeSprite.enabled = true;
+        slot1 = GetComponent<Slot>();
     }
 
 
@@ -260,11 +261,8 @@ public class Player_Controller : MonoBehaviour
         // ---- End XP and Lvl Controller ----
 
         // -> Inventory Use
-      /*  if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
 
-        }
-      */
+      
     }
 
     void FixedUpdate()
@@ -366,7 +364,6 @@ public class Player_Controller : MonoBehaviour
     public void AdEnemy()
     {
         enemyCount++;
-        Debug.Log("ad");
     }
 
 
