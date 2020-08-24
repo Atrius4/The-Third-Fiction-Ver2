@@ -6,6 +6,7 @@ public class EnemyBullet : MonoBehaviour
 {
     public float bulletSpeed;
     public Rigidbody2D bulletRb;
+    public int AttackDamage;
 
     void Awake()
     {
@@ -19,8 +20,13 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hit)
     {
-        if (hit.gameObject.CompareTag("Player") || hit.gameObject.CompareTag("Ground") || hit.gameObject.CompareTag("Wall"))
+        if (hit.gameObject.CompareTag("Ground") || hit.gameObject.CompareTag("Wall"))
         {
+            Destroy(gameObject);
+        }
+        else if (hit.gameObject.CompareTag("Player"))
+        {
+            hit.GetComponent<Player_Controller>().TakeDamage(AttackDamage);
             Destroy(gameObject);
         }
     }

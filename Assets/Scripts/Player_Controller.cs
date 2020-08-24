@@ -308,7 +308,7 @@ public class Player_Controller : MonoBehaviour
         canDash = true;
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
