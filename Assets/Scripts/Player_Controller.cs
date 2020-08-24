@@ -5,6 +5,7 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -60,6 +61,9 @@ public class Player_Controller : MonoBehaviour
     public int level;
     public int enemyCount;
 
+    public int lifes;
+    public Image lifeSprite;
+
     // ---- Check Point Variables ----
     public Vector3 respawnPoint;
 
@@ -81,7 +85,7 @@ public class Player_Controller : MonoBehaviour
         lvlManager.SetLevel(level);
         hasDoubleJump = false;
         shootSound = GetComponent<AudioSource>();
-        
+        lifeSprite.enabled = true;
     }
 
 
@@ -223,6 +227,20 @@ public class Player_Controller : MonoBehaviour
             TakeDamage(20);
         }
 
+        if (currentHealth <= 0 && lifes >= 1)
+        {
+            lifes--;
+            lifeSprite.enabled = false;
+            transform.position = respawnPoint;
+            currentHealth = maxHealth;
+            healthBar.SetHealth(currentHealth);
+        }
+
+        if (currentHealth <= 0 && lifes < 1)
+        {
+            SceneManager.LoadScene(1);
+        }
+
         // ---- End HEALTH Controller ----
 
         // ---- XP and Lvl Controller ----
@@ -318,7 +336,6 @@ public class Player_Controller : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
         healthBar.SetHealth(currentHealth);
     }
 
@@ -343,6 +360,13 @@ public class Player_Controller : MonoBehaviour
             hasDoubleJump = true;
             Destroy(other.gameObject);
         }
+
+    }
+
+    public void AdEnemy()
+    {
+        enemyCount++;
+        Debug.Log("ad");
     }
 
 

@@ -5,15 +5,19 @@ using UnityEngine.UI;
 
 public class CollectablesManager : MonoBehaviour
 {
-    [SerializeField] public int coins = 0;
-    [SerializeField] private Text coinsText;
+    [SerializeField] public int coins, collectedCoins;
+    [SerializeField] private Text coinsText, collectedCoinsText;
+
+    
 
 
    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Coin"))
         {
-            coins += 1;
+            coins ++;
+            collectedCoins++;
+            collectedCoinsText.text = collectedCoins.ToString();
             coinsText.text = coins.ToString();
         }
     }

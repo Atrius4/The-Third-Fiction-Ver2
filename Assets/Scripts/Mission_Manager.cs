@@ -12,7 +12,7 @@ public class Mission_Manager : MonoBehaviour
     public Text levelComplete;
     GameObject enemy;
     GameObject player;
-    private int enemyCount;
+    public int enemyCount;
     private int mission;
     [SerializeField] private Text enemyText;
 
@@ -27,34 +27,36 @@ public class Mission_Manager : MonoBehaviour
         checkDoubleJump.enabled = false;
         checkEnemy.enabled = false;
         checkCoins.enabled = false;
+        levelComplete.enabled = false;
+        mission = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (enemy.GetComponent<Enemy_HPManager>().Health <= 0)
+        if (player.GetComponent<Player_Controller>().enemyCount <= 8)
         {
-            enemyCount++;
-            enemyText.text = enemyCount.ToString();
+            enemyText.text = player.GetComponent<Player_Controller>().enemyCount.ToString();
         }
 
-        if (enemyCount == 8)
+        if (player.GetComponent<Player_Controller>().enemyCount == 8)
         {
             checkEnemy.enabled = true;
-            mission++;
         }
-        if (player.GetComponent<CollectablesManager>().coins == 45)
+        if (player.GetComponent<CollectablesManager>().collectedCoins == 45)
         {
             checkCoins.enabled = true;
-            mission++;
         }
         if (player.GetComponent<Player_Controller>().hasDoubleJump == true)
         {
             checkDoubleJump.enabled = true;
-            mission++;
         }
-
-
+        if (checkEnemy.enabled == true && checkCoins.enabled == true && checkDoubleJump.enabled == true)
+        {
+            levelComplete.enabled = true;
+        }
     }
+
+
 
 }

@@ -23,7 +23,7 @@ public class Enemy_HPManager : MonoBehaviour
         Enemy_UI = GetComponent<Enemy_UIManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Controller>();
         render = GetComponent<Renderer>();
-        collider = GetComponent<Collider2D>();      
+        collider = GetComponent<Collider2D>();
     }
 
     //Activar la animacion cuando la Vida llega a 0
@@ -45,6 +45,8 @@ public class Enemy_HPManager : MonoBehaviour
     public void DestroyOnTime()
     {
         player.gainXp(10);
+        player.AdEnemy();
+        
         render.enabled = false;
         collider.enabled = false;
         Enemy_UI.DisableHP();
