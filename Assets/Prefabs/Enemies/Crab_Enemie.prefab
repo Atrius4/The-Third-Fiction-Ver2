@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 1813867356266808362}
   - component: {fileID: 1813867356266808341}
   - component: {fileID: 1813867356266808343}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FollowArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1813867356693094630}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Crab_Enemie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1813867357902678375}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DefaultPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 8590893145682055854}
   - component: {fileID: 7862397978689483070}
   - component: {fileID: 9216194899072634874}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Crab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 5652473027704227948}
   - component: {fileID: 8998458503469241782}
   - component: {fileID: 3652062154886826457}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Damage_Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,7 +561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackDamage: 10
-  PunchForce: 20
+  PunchForce: 1000
   EnemyObject: {fileID: 1813867358002704152}
 --- !u!1001 &3920006596988071706
 PrefabInstance:
@@ -600,6 +600,11 @@ PrefabInstance:
       propertyPath: fill
       value: 
       objectReference: {fileID: 8077022474087183565}
+    - target: {fileID: 5076102267425227431, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5076102267793497777, guid: 7e1ad6634b8705b459188729bfedd702,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -715,6 +720,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyHealth
       objectReference: {fileID: 0}
+    - target: {fileID: 5076102267793497781, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076102268415728585, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5076102268415728598, guid: 7e1ad6634b8705b459188729bfedd702,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -724,6 +739,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076102268442475804, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5076102268569603876, guid: 7e1ad6634b8705b459188729bfedd702,
         type: 3}
@@ -744,6 +764,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 0.57254905
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076102268569603878, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e1ad6634b8705b459188729bfedd702, type: 3}

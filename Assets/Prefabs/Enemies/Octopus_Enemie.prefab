@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4721983754923142283}
   - component: {fileID: 6516506862803452480}
   - component: {fileID: 8332185904930336241}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Damage_Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackDamage: 25
-  PunchForce: 0
+  PunchForce: 1000
   EnemyObject: {fileID: 5348873184062961879}
 --- !u!1 &5348873183463341075
 GameObject:
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 5348873183463341079}
   - component: {fileID: 5348873183463341078}
   - component: {fileID: 5348873183463341077}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FollowArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5348873183920723573}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Octopus_Enemie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 7312981930118128315}
   - component: {fileID: 2718208563527670367}
   - component: {fileID: 5126000898185471595}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Octopus
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -453,7 +453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5348873184122396128}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DefaultPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,6 +506,11 @@ PrefabInstance:
       propertyPath: fill
       value: 
       objectReference: {fileID: 5001062265011177629}
+    - target: {fileID: 5076102267425227431, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5076102267793497777, guid: 7e1ad6634b8705b459188729bfedd702,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -616,6 +621,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyHealth
       objectReference: {fileID: 0}
+    - target: {fileID: 5076102267793497781, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076102268415728585, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5076102268415728598, guid: 7e1ad6634b8705b459188729bfedd702,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -625,6 +640,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076102268442475804, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076102268569603878, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e1ad6634b8705b459188729bfedd702, type: 3}

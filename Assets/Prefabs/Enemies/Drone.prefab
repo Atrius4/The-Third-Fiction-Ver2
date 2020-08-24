@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6253616969631837207}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1846102052756254345}
   - component: {fileID: 1846102052756254344}
   - component: {fileID: 1846102052756254347}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: VisionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 5221038382349907960}
   - component: {fileID: 4904232950552542528}
   - component: {fileID: 4592369425675918911}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Drone
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1846102053872310385}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,6 +452,11 @@ PrefabInstance:
       propertyPath: fill
       value: 
       objectReference: {fileID: 2408899863492290927}
+    - target: {fileID: 5076102267425227431, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5076102267793497777, guid: 7e1ad6634b8705b459188729bfedd702,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -562,6 +567,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyHealth
       objectReference: {fileID: 0}
+    - target: {fileID: 5076102267793497781, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076102268415728585, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5076102268415728598, guid: 7e1ad6634b8705b459188729bfedd702,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -571,6 +586,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076102268442475804, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076102268569603878, guid: 7e1ad6634b8705b459188729bfedd702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e1ad6634b8705b459188729bfedd702, type: 3}
