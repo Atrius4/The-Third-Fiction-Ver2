@@ -12,6 +12,9 @@ public class Player_Controller : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] Animator animator;
     public AudioSource shootSound;
+    public AudioSource jumpSound;
+    public AudioSource hurtSound;
+
 
 
     // ---- MOVEMENT Variables ----
@@ -87,6 +90,7 @@ public class Player_Controller : MonoBehaviour
         shootSound = GetComponent<AudioSource>();
         lifeSprite.enabled = true;
         slot1 = GetComponent<Slot>();
+        
     }
 
 
@@ -102,6 +106,7 @@ public class Player_Controller : MonoBehaviour
             isJumping = true;
             jumpTimeCounter = jumpTime;
             rb.velocity = Vector2.up * jumpForce;
+            jumpSound.Play();
 
         }
         else if (Input.GetButtonDown("Jump") && extraJump > 0 && hasDoubleJump == true) // Aqui se hace el doble salto.
@@ -109,6 +114,8 @@ public class Player_Controller : MonoBehaviour
             rb.velocity = Vector2.up * secondJumpForce;
             animator.SetBool("jumping", true);
             extraJump--;
+            jumpSound.Play();
+
         }
 
 
@@ -333,6 +340,7 @@ public class Player_Controller : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        hurtSound.Play();
     }
 
     public void gainXp(int gainedXp)

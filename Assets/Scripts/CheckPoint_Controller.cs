@@ -9,6 +9,7 @@ public class CheckPoint_Controller : MonoBehaviour
     private SpriteRenderer checkPointRenderer;
     public bool checkPointreached;
     GameObject []lamps;
+    public AudioSource checkpoint;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,7 @@ public class CheckPoint_Controller : MonoBehaviour
         if (other.tag == "Player")
         {
             UpdateCheckPoint();
+
         }
 
     }
@@ -41,5 +43,7 @@ public class CheckPoint_Controller : MonoBehaviour
         }
         checkPointRenderer.sprite = lampOn;
         checkPointreached = true;
+        checkpoint.Play();
+
     }
 }
