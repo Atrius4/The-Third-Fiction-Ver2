@@ -5,16 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-
+    public AudioSource select;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            PlayGame();
+            Invoke("PlayGame", 2);
+            select.Play();
         }
     }
-
-
 
     public void PlayGame ()
     {
