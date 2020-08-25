@@ -239,7 +239,7 @@ public class Player_Controller : MonoBehaviour
 
         if (currentHealth <= 0 && lifes < 1)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
         // ---- End HEALTH Controller ----
@@ -365,6 +365,10 @@ public class Player_Controller : MonoBehaviour
         enemyCount++;
     }
 
-
+    public void RegainLife()
+    {
+        currentHealth += 30;
+        healthBar.SetHealth(currentHealth);
+    }
 
 }
