@@ -11,6 +11,7 @@ public class Tutorial_Manager : MonoBehaviour
     private string text;
     private int state = 0;
     private float nextTextCounter;
+    private bool cumplido = false;
     [SerializeField] private float nextTextEvery;
 
     public void Awake()
@@ -31,7 +32,10 @@ public class Tutorial_Manager : MonoBehaviour
                 textComp.text = MoveCheck();
                 break;
             case 2:
-                //textComp.text = AttackCheck();
+                textComp.text = AttackCheck();
+                break;
+            case 3:
+                textComp.text = DashCheck();
                 break;
         }
 
@@ -58,34 +62,92 @@ public class Tutorial_Manager : MonoBehaviour
 
     public string MoveCheck()
     {
+        
         if (nextTextCounter < 2 * nextTextEvery && nextTextCounter >= nextTextEvery)
         {
-            text = "Te puedes mover con <-,->";
+            text = "Te puedes mover con '<-' , '->'";
+            cumplido = false;
         }
-        else if (nextTextCounter < nextTextEvery)
+        else if (nextTextCounter < nextTextEvery && cumplido == false)
         {
-            text = "Intentalo Ahora";
-            Debug.Log(Input.GetAxis("Horizontal"));
+            text = "Intentalo Moverte";
             nextTextCounter = nextTextEvery - 0.1f;
             if(Input.GetAxis("Horizontal") != 0)
             {
-                text = "Muy bien";          
+                cumplido = true;
             }
+        }
+        else if(nextTextCounter< nextTextEvery && cumplido == true)
+        {
+            text = "Muy bien";
         }
         if (nextTextCounter < 0)
         {
             state = 2;
             PassText();
         }
+
         return text;
 
     }
 
-    //public string AttackCheck()
-    //{
+    public string AttackCheck()
+    {
+        if (nextTextCounter < 2 * nextTextEvery && nextTextCounter >= nextTextEvery)
+        {
+            text = "Ahora el ataque, Puedes atacar con 'Z', tambien puedes hacer un ataque mientras corres";
+            cumplido = false;
+        }
+        else if (nextTextCounter < nextTextEvery && cumplido == false)
+        {
+            text = "Intentalo Atacar";
+            nextTextCounter = nextTextEvery - 0.1f;
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                cumplido = true;
+            }
+        }
+        else if (nextTextCounter < nextTextEvery && cumplido == true)
+        {
+            text = "Muy bien";
+        }
+        if (nextTextCounter < 0)
+        {
+            state = 3;
+            PassText();
+        }
 
-    //}
-    
+        return text;
+    }
+
+    public string DashCheck()
+    {
+        if (nextTextCounter < 2 * nextTextEvery && nextTextCounter >= nextTextEvery)
+        {
+            text = "Todos los personajes tienen un Dash, Puedes usarlo con la tecla 'X', Ten cuidado pues tiene CD";
+            cumplido = false;
+        }
+        else if (nextTextCounter < nextTextEvery && cumplido == false)
+        {
+            text = "Intenta hacer un Dash";
+            nextTextCounter = nextTextEvery - 0.1f;
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                cumplido = true;
+            }
+        }
+        else if (nextTextCounter < nextTextEvery && cumplido == true)
+        {
+            text = "Muy bien";
+        }
+        if (nextTextCounter < 0)
+        {
+            state = 4;
+            PassText();
+        }
+        return text;
+    }
+
     public void PassText()
     {
         nextTextCounter = nextTextEvery * 2;
