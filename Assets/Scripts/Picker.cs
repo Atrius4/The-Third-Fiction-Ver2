@@ -9,7 +9,7 @@ public class Picker : MonoBehaviour
     {
         Debug.Log("Seleccionado : " + name);
         GameManager.id = int.Parse(name);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
       
     
