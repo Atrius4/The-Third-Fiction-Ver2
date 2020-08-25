@@ -562,6 +562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackDamage: 10
   PunchForce: 1000
+  punchCD: 0
   EnemyObject: {fileID: 1813867358002704152}
 --- !u!1001 &3920006596988071706
 PrefabInstance:

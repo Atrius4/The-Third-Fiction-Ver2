@@ -6,6 +6,7 @@ public class Damage_Controller : MonoBehaviour
 {
     public int AttackDamage;
     public float PunchForce;
+    public float punchCD;
     public GameObject EnemyObject;
 
     Rigidbody2D EnemyRB, PlayerRB;
@@ -15,11 +16,20 @@ public class Damage_Controller : MonoBehaviour
     void Awake()
     {
         EnemyRB = EnemyObject.GetComponent<Rigidbody2D>();
+        
     }
 
-    void OnTriggerEnter2D(Collider2D ColliderPlayer)
+    private void Update()
     {
-        if (ColliderPlayer.CompareTag("Player"))
+        if (punchCD > 0)
+        {
+            punchCD -= Time.deltaTime;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D ColliderPlayer)
+    {
+        if (ColliderPlayer.CompareTag("Player") && punchCD <= 0)
         {
             PlayerRB = ColliderPlayer.GetComponent<Rigidbody2D>();
             ColliderPlayer.GetComponent<Player_Controller>().TakeDamage(AttackDamage);
@@ -28,6 +38,7 @@ public class Damage_Controller : MonoBehaviour
             PlayerRB.AddForce(VecDif.normalized * PunchForce * -1);
 
             ColliderPlayer.GetComponent<DamageIndicator>().Damaged();
+            punchCD = 1;
         }
     }
 }
