@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Tutorial_Manager : MonoBehaviour
 {
     private Text textComp;
     private string text;
-    private int state = 0;
+    public int state = 0;
     private float nextTextCounter;
     private bool cumplido = false;
+    [SerializeField]private GameObject spawningEnemy;
+    private GameObject killable;
+    [SerializeField] private GameObject positionSapwn;
     [SerializeField] private float nextTextEvery;
 
     public void Awake()
@@ -35,6 +39,20 @@ public class Tutorial_Manager : MonoBehaviour
                 break;
             case 3:
                 textComp.text = DashCheck();
+                break;
+            case 4:
+                killable = Instantiate(spawningEnemy, positionSapwn.transform.position, positionSapwn.transform.rotation);
+
+                state = 5;
+                break;
+            case 5:
+                textComp.text = KillingCheck(killable);
+                break;
+            case 6:
+                if(nextTextCounter < nextTextEvery)
+                {
+                    SceneManager.LoadScene(2);
+                }
                 break;
         }
 
@@ -69,7 +87,7 @@ public class Tutorial_Manager : MonoBehaviour
         }
         else if (nextTextCounter < nextTextEvery && cumplido == false)
         {
-            text = "Intentalo Moverte";
+            text = "Intenta Moverte";
             nextTextCounter = nextTextEvery - 0.1f;
             if(Input.GetAxis("Horizontal") != 0)
             {
@@ -99,7 +117,7 @@ public class Tutorial_Manager : MonoBehaviour
         }
         else if (nextTextCounter < nextTextEvery && cumplido == false)
         {
-            text = "Intentalo Atacar";
+            text = "Intenta Atacar";
             nextTextCounter = nextTextEvery - 0.1f;
             if (Input.GetKeyDown(KeyCode.Z))
             {
@@ -143,6 +161,21 @@ public class Tutorial_Manager : MonoBehaviour
         {
             state = 4;
             PassText();
+        }
+        return text;
+    }
+
+    public string KillingCheck(GameObject tutorialEnemy)
+    {
+        if(tutorialEnemy != null)
+        {
+            text = "Ahora mata al cangrejo";
+        }
+        else
+        {
+            text = "Buen trabajo!";
+            PassText();
+            state = 6;
         }
         return text;
     }
