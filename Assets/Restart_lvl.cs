@@ -18,7 +18,7 @@ public class Restart_lvl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             select.Play();
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
