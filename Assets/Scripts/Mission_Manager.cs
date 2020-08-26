@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Mission_Manager : MonoBehaviour
 {
@@ -53,7 +54,7 @@ public class Mission_Manager : MonoBehaviour
         }
         if (checkEnemy.enabled == true && checkCoins.enabled == true && checkDoubleJump.enabled == true)
         {
-            levelComplete.enabled = true;
+            SceneManager.LoadScene(4);
         }
     }
 

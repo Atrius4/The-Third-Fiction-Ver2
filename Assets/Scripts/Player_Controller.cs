@@ -45,8 +45,10 @@ public class Player_Controller : MonoBehaviour
 
     // ---- DASH Variables ----
 
-    [SerializeField] float dashForce;
-    private bool canDash;
+    [SerializeField] float dashForce, dashCd, dashCount;
+    private bool canDash, startCoolDown;
+    public Text dashCdText;
+    public GameObject dashParticles;
 
     // ---- SHOOT Variables ---
 
@@ -58,14 +60,17 @@ public class Player_Controller : MonoBehaviour
     public Health_Bar healthBar;
     [SerializeField] int maxHealth;
     public int currentHealth;
+
     public Xp_Bar xpBar;
     public int xpToNextLevel;
+
     public Level_Manager lvlManager;
     public int level;
     public int enemyCount;
-
     public int lifes;
     public Image lifeSprite;
+
+
 
     // ---- Check Point Variables ----
     public Vector3 respawnPoint;
@@ -79,7 +84,12 @@ public class Player_Controller : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         extraJump = extraJumpsValue;
+
+        dashCount = dashCd;
         canDash = true;
+        startCoolDown = false;
+        dashCdText.text = dashCount.ToString();
+
         ShootTimeCounter = shootTime;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
@@ -90,7 +100,6 @@ public class Player_Controller : MonoBehaviour
         shootSound = GetComponent<AudioSource>();
         lifeSprite.enabled = true;
         slot1 = GetComponent<Slot>();
-        
     }
 
 
@@ -158,31 +167,29 @@ public class Player_Controller : MonoBehaviour
         // ---- DASH Controller----
 
 
-        if (!faceingright && Input.GetKeyDown(KeyCode.X))
+        if (!faceingright && Input.GetKeyDown(KeyCode.X) && canDash)
         {
-
-            if (canDash)
-            {
-                rb.velocity = Vector2.right * dashForce;
-                canDash = false;
-                Invoke("cooldownDash", 2);
-            }
-
+            rb.velocity = Vector2.right * dashForce;
+            Instantiate(dashParticles, this.transform.position, dashParticles.transform.rotation);
+            startCoolDown = true;
+            canDash = false;
+            Invoke("cooldownDash", dashCd);
         }
 
-        if (faceingright && Input.GetKeyDown(KeyCode.X))
+        if (faceingright && Input.GetKeyDown(KeyCode.X) && canDash)
         {
-
-            if (canDash)
-            {
-                rb.velocity = Vector2.left * dashForce;
-                canDash = false;
-                Invoke("cooldownDash", 1);
-            }
+            rb.velocity = Vector2.left * dashForce;
+            Instantiate(dashParticles, this.transform.position, dashParticles.transform.rotation);
+            startCoolDown = true;
+            canDash = false;
+            Invoke("cooldownDash", dashCd);
         }
 
-
-        // ---- End DASH Controller ----
+        if (startCoolDown == true && dashCount >= 0)
+        {
+            dashCount -= 1 * Time.deltaTime;
+            dashCdText.text = dashCount.ToString();
+        }
 
         // ---- ANIMATION Controller ----  *P.S -> No todas las animaciones estan áca, algunas estan con sus respectivos controladores.
 
@@ -303,6 +310,10 @@ public class Player_Controller : MonoBehaviour
         }
 
 
+
+
+        // ---- End DASH Controller ----
+
     }
 
     //void flipSprite() // Alternative function for Flip
@@ -334,6 +345,9 @@ public class Player_Controller : MonoBehaviour
     void cooldownDash()
     {
         canDash = true;
+        dashCount = dashCd;
+        dashCdText.text = dashCount.ToString();
+        startCoolDown = false;
     }
 
     public void TakeDamage(int damage)
