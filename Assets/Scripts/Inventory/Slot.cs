@@ -7,12 +7,14 @@ public class Slot : MonoBehaviour
     private Inventory inventory;
     private Player_Controller player;
     private GameObject item;
+    private AudioSource drinkSound;
     [SerializeField] private int i;
 
     private void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Controller>();
+        drinkSound = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -37,6 +39,7 @@ public class Slot : MonoBehaviour
             {
                 player.RegainLife();
                 GameObject.Destroy(child.gameObject);
+                drinkSound.Play();
             }
         }
     }
