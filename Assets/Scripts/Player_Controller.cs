@@ -20,10 +20,10 @@ public class Player_Controller : MonoBehaviour
 
     // ---- MOVEMENT Variables ----
 
-    private float moveInput;
+    private float moveInput; // obtiene valores del Input.GetAxis("Horizontal")
     Vector3 movement;
     [SerializeField] float speed;
-    private bool faceingright;
+    private bool faceingRight; // metodos: Movement, Flip
 
 
     // ---- JUMP Variables ----
@@ -108,8 +108,70 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
         // ---- JUMP Controller ----
+        Jump();
 
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRaious, whatGround);
+
+        // ---- DASH Controller----
+        Dash();
+
+        // ---- ANIMATION Controller ----  *P.S -> No todas las animaciones estan áca, algunas estan con sus respectivos controladores.
+
+        // -> Shooting
+
+        Animation();
+
+
+        // ---- HEALTH Controller ----
+
+        HealthController();
+
+
+        // ---- XP and Lvl Controller ----
+        XpLevel();
+    }
+
+    void FixedUpdate()
+    {
+        // -------------------------- Movement by Physics--------------------
+        //moveInput = Input.GetAxis("Horizontal");
+        //rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        //animator.SetFloat("speed", Math.Abs(moveInput));
+
+        //if (facingRight == false && moveInput > 0)
+        //{
+        //    flipSprite();
+        //}
+        //else if (facingRight == true && moveInput < 0)
+        //{
+        //    flipSprite();
+        //}
+
+        // -------------------------- Movement by Transform
+        Movement();
+
+    }
+
+    void Movement()
+    {
+        moveInput = Input.GetAxis("Horizontal");
+        movement = new Vector3(moveInput, 0f, 0f);
+        transform.position += movement * Time.deltaTime * speed;
+        animator.SetFloat("speed", Math.Abs(moveInput));
+
+        if (movement.x < 0 && !faceingRight)
+        {
+            flip();
+
+        }
+        else if (movement.x > 0 && faceingRight)
+        {
+            flip();
+        }
+    }
+
+    void Jump()
+    {
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRaious, whatGround); // Booleano para verificar si el jugador toca el suelo.
 
         if (isGrounded == true && Input.GetButtonDown("Jump") && extraJump > 0)
         {
@@ -129,7 +191,7 @@ public class Player_Controller : MonoBehaviour
         }
 
 
-        if (Input.GetButton("Jump") && isJumping == true)
+        if (Input.GetButton("Jump") && isJumping == true) // Minetras se deja la barra espaciadora slata más alto
         {
 
             if (jumpTimeCounter > 0)
@@ -162,22 +224,20 @@ public class Player_Controller : MonoBehaviour
         {
             hasDoubleJump = true;
         }
+    }
 
-        // ---- End JUMP Controller ----
-
-        // ---- DASH Controller----
-
-
-        if (!faceingright && Input.GetKeyDown(KeyCode.X) && canDash)
+    void Dash()
+    {
+        if (!faceingRight && Input.GetKeyDown(KeyCode.X) && canDash)
         {
             rb.velocity = Vector2.right * dashForce;
             Instantiate(dashParticles, this.transform.position, dashParticles.transform.rotation);
             startCoolDown = true;
             canDash = false;
-            Invoke("cooldownDash", dashCd);
+            Invoke("cooldownDash", dashCd); // resetea variables (Mirar método cooldownDash)
         }
 
-        if (faceingright && Input.GetKeyDown(KeyCode.X) && canDash)
+        if (faceingRight && Input.GetKeyDown(KeyCode.X) && canDash)
         {
             rb.velocity = Vector2.left * dashForce;
             Instantiate(dashParticles, this.transform.position, dashParticles.transform.rotation);
@@ -191,10 +251,11 @@ public class Player_Controller : MonoBehaviour
             dashCount -= 1 * Time.deltaTime;
             dashCdText.text = dashCount.ToString();
         }
+    }
 
-        // ---- ANIMATION Controller ----  *P.S -> No todas las animaciones estan áca, algunas estan con sus respectivos controladores.
-
-        // -> Shooting
+    void Animation()
+    {
+        // ---- Shooting Animation ----
 
         if (Input.GetKeyDown(KeyCode.Z) && moveInput == 0)
         {
@@ -210,7 +271,7 @@ public class Player_Controller : MonoBehaviour
             shootSound.Play();
         }
 
-        if (Input.GetKey(KeyCode.Z) && movement.x != 0)
+        if (Input.GetKey(KeyCode.Z) && movement.x != 0) // blinjae para que si se deja undido y disparar y te mueves pasa a la animación de correr.
         {
             animator.SetBool("shooting", false);
         }
@@ -233,12 +294,11 @@ public class Player_Controller : MonoBehaviour
         {
             ShootTimeCounter -= Time.deltaTime;
         }
+    }
 
-        // ---- End Animation Controller ----
-
-        // ---- HEALTH Controller ----
-
-        if (Input.GetKeyDown(KeyCode.U))
+    void HealthController()
+    {
+        if (Input.GetKeyDown(KeyCode.U)) // para testeo
         {
             TakeDamage(20);
         }
@@ -256,10 +316,10 @@ public class Player_Controller : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
+    }
 
-        // ---- End HEALTH Controller ----
-
-        // ---- XP and Lvl Controller ----
+    void XpLevel()
+    {
         if (Input.GetKeyDown(KeyCode.I)) // ----> testeo del sistema de xp y nivel.
         {
             gainXp(10);
@@ -273,63 +333,10 @@ public class Player_Controller : MonoBehaviour
             lvlManager.SetLevel(level);
         }
 
-
-        // ---- End XP and Lvl Controller ----
-
-        // -> Inventory Use
     }
-
-    void FixedUpdate()
-    {
-        // -------------------------- Movement by Physics--------------------
-        //moveInput = Input.GetAxis("Horizontal");
-        //rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
-        //animator.SetFloat("speed", Math.Abs(moveInput));
-
-        //if (facingRight == false && moveInput > 0)
-        //{
-        //    flipSprite();
-        //}
-        //else if (facingRight == true && moveInput < 0)
-        //{
-        //    flipSprite();
-        //}
-
-        // -------------------------- Movement by Transform
-        moveInput = Input.GetAxis("Horizontal");
-        movement = new Vector3(moveInput, 0f, 0f);
-        transform.position += movement * Time.deltaTime * speed;
-        animator.SetFloat("speed", Math.Abs(moveInput));
-
-        if (movement.x < 0 && !faceingright )
-        {
-            flip();
-
-        }
-        else if (movement.x > 0 && faceingright)
-        {
-            flip();
-        }
-
-
-
-
-        // ---- End DASH Controller ----
-
-    }
-
-    //void flipSprite() // Alternative function for Flip
-    //{
-    //    facingRight = !facingRight;
-
-    //    Vector3 scaler = transform.localScale;
-    //    scaler.x *= -1;
-    //    transform.localScale = scaler;
-    //}
-
     void flip()
     {
-        faceingright = !faceingright;
+        faceingRight = !faceingRight;
 
         transform.Rotate(0f, 180f, 0f);
 
@@ -359,7 +366,7 @@ public class Player_Controller : MonoBehaviour
         hurtSound.Play();
     }
 
-    public void gainXp(int gainedXp)
+    public void gainXp(int gainedXp) // esta funcion se llama en el enemyHp Manager
     {
         xpBar.xp += gainedXp;
     }
@@ -383,8 +390,7 @@ public class Player_Controller : MonoBehaviour
 
     }
 
-
-    public void AdEnemy()
+    public void AdEnemy() // esta funcion se llama en el enemyHp Manager y se usa para la misión de enemigos.
     {
         enemyCount++;
     }

@@ -45,8 +45,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2.23, y: 3.35}
+  m_Offset: {x: 0.05092752, y: -0.120373964}
+  m_Size: {x: 1.7948022, y: 3.109252}
   m_Direction: 0
 --- !u!114 &8332185904930336241
 MonoBehaviour:
@@ -62,6 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackDamage: 25
   PunchForce: 1000
+  punchCD: 0
   EnemyObject: {fileID: 5348873184062961879}
 --- !u!1 &5348873183463341075
 GameObject:
@@ -294,8 +295,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2.3486176, y: 3.0989075}
+  m_Offset: {x: 0, y: -0.07650375}
+  m_Size: {x: 2.3486176, y: 3.251915}
   m_Direction: 0
 --- !u!114 &399979056073190869
 MonoBehaviour:
@@ -442,6 +443,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   Enemy_UI: {fileID: 0}
   Object: {fileID: 5348873183920723572}
+  dmgCollider: {fileID: 6516506862803452480}
+  bodyCollider: {fileID: 5348873184062961881}
   Health: 120
   MaxHealth: 120
 --- !u!1 &5348873184122396159

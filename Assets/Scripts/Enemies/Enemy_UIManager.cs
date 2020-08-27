@@ -52,7 +52,7 @@ public class Enemy_UIManager : MonoBehaviour
         TimeActiveUI = 0f;
     }
 
-    public void DisableHP()
+    public void DisableHP() // se llama desde el enemy_HPManager
     {
         ActiveUI = false;
         Debug.Log(ActiveUI);

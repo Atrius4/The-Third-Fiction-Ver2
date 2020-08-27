@@ -31,7 +31,7 @@ public class AudioController_Crab : MonoBehaviour
         }
     }
 
-    public void PlayDeathSound()
+    public void PlayDeathSound() // (evento de animación) se llama en animación de muerte.
     {
         audio.Stop();
         soundTimer = 100;

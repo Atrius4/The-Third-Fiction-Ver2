@@ -254,6 +254,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   Enemy_UI: {fileID: 0}
   Object: {fileID: 1670166992779077098}
+  dmgCollider: {fileID: 1846102052756254345}
+  bodyCollider: {fileID: 3322320333713738043}
   Health: 60
   MaxHealth: 60
 --- !u!114 &5221038382349907960

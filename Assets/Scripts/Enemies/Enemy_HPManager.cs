@@ -8,13 +8,14 @@ public class Enemy_HPManager : MonoBehaviour
     // Variables del Enemigo
     public Animator anim;
     public Enemy_UIManager Enemy_UI;
+    public int Health;
+    public int MaxHealth;
     public GameObject Object;
     Player_Controller player;
     private Renderer render;
-    private Collider2D collider;
+    [SerializeField]private Collider2D dmgCollider,bodyCollider;
     private float destructionCounter = 1.8f;
-    public int Health;
-    public int MaxHealth;
+    private Rigidbody2D rb;
 
 
     void Awake()
@@ -23,7 +24,7 @@ public class Enemy_HPManager : MonoBehaviour
         Enemy_UI = GetComponent<Enemy_UIManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Controller>();
         render = GetComponent<Renderer>();
-        collider = GetComponent<Collider2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     //Activar la animacion cuando la Vida llega a 0
@@ -33,22 +34,23 @@ public class Enemy_HPManager : MonoBehaviour
         if(Health <= 0)
         {
             anim.SetBool("IsDeath", true);
+            dmgCollider.enabled = false;
+            bodyCollider.enabled = false;
+            rb.isKinematic = true;
         }
         if (anim.GetBool("IsDeath"))
         {
             destructionCounter -= Time.deltaTime;
-            if(destructionCounter <= 0) { Destroy(Object); }
+            if(destructionCounter <= 0) { Destroy(Object); } // el Object destruye el prefab Padrino *italian noises*
         }
     }
 
     //La animacion activa esta funcion en un evento.
-    public void DestroyOnTime()
+    public void DestroyOnTime() // evento de animación
     {
         player.gainXp(10);
         player.AdEnemy();
-        
         render.enabled = false;
-        collider.enabled = false;
         Enemy_UI.DisableHP();
     }
 

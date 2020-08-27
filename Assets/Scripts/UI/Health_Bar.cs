@@ -13,12 +13,11 @@ public class Health_Bar : MonoBehaviour
     {
         slider.maxValue = health;
         slider.value = health;
-        fill.color = gradient.Evaluate(1f);
+        fill.color = gradient.Evaluate(1f); // evalua el valor para cambiar el color en el punto máximo del slider.
     }
     public void SetHealth(int health)
     {
         slider.value = health;
-
-        fill.color = gradient.Evaluate(slider.normalizedValue);
+        fill.color = gradient.Evaluate(slider.normalizedValue); // evalua el valor para cambiar el color dependiendo de porcentaje del slider.
     }
 }

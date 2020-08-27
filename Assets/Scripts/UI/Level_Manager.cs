@@ -7,7 +7,7 @@ public class Level_Manager : MonoBehaviour
 {
     public Text text;
 
-    public void SetLevel(int newLevel)
+    public void SetLevel(int newLevel) // se llama en el player.
     {
         text.text = newLevel.ToString();
     }
