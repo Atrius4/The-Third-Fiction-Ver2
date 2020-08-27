@@ -14,6 +14,7 @@ public class Player_Controller : MonoBehaviour
     public AudioSource shootSound;
     public AudioSource jumpSound;
     public AudioSource hurtSound;
+    public AudioSource levelUpSound;
 
 
 
@@ -267,6 +268,7 @@ public class Player_Controller : MonoBehaviour
         if (xpBar.slider.value >= xpBar.slider.maxValue)
         {
             xpBar.slider.value = 0;
+            levelUpSound.Play();
             level++;
             lvlManager.SetLevel(level);
         }
