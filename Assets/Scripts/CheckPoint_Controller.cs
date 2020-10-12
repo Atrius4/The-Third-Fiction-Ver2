@@ -42,8 +42,12 @@ public class CheckPoint_Controller : MonoBehaviour
 
         }
         checkPointRenderer.sprite = lampOn;
+        if (!checkPointreached)
+        {
+            checkpoint.Play();
+        }
         checkPointreached = true;
-        checkpoint.Play();
+        
 
     }
 }

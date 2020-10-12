@@ -6,18 +6,17 @@ public class Distance_Weapon : MonoBehaviour
 {
     public Transform fireOrigin;
     public GameObject kaiaBulletPrefab;
+    private Kaia_AudioController weaponAudio;
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Shoot();
-        }
+        weaponAudio = GetComponent<Kaia_AudioController>();
     }
 
-    void Shoot()
-    {
+    public void Shoot()
+    {            
+        weaponAudio.PlayShootSound();
         Instantiate(kaiaBulletPrefab, fireOrigin.position, fireOrigin.rotation);
+
     }
 }

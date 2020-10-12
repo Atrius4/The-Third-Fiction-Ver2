@@ -6,10 +6,10 @@ public class BgSoundManager : MonoBehaviour
 {
     public AudioSource audio1;
     public AudioSource audio2;
-    Player_Controller player;
+    Movement player;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Controller>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
         audio2.Play();
         audio1.Play();
     }

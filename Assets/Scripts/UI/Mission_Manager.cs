@@ -40,7 +40,7 @@ public class Mission_Manager : MonoBehaviour
         {
             checkCoins.enabled = true;
         }
-        if (player.GetComponent<Player_Controller>().hasDoubleJump == true)
+        if (player.GetComponent<Movement>().hasDoubleJump == true)
         {
             checkDoubleJump.enabled = true;
         }
