@@ -119,12 +119,12 @@ public class Movement : MonoBehaviour
         
     }
 
-    public void Move()
+    public void Move(float input)
      {
-        moveInput = Input.GetAxis("Horizontal");
-        movement = new Vector3(moveInput, 0f, 0f);
+        
+        movement = new Vector3(input, 0f, 0f);
         transform.position += movement * Time.deltaTime * speed;
-        animator.SetFloat("speed", Mathf.Abs(moveInput));
+   
 
         if (movement.x < 0 && !faceingRight)
         {

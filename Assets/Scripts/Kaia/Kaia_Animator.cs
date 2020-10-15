@@ -58,4 +58,9 @@ public class Kaia_Animator : MonoBehaviour
             ShootTimeCounter -= Time.deltaTime;
         }
     }
+
+    public void MovementAnimation(float input)
+    {
+        animator.SetFloat("speed", Mathf.Abs(input));
+    }
 }

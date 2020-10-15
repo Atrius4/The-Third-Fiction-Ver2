@@ -67,9 +67,16 @@ public class Player_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Esto es un cambio minúsculo (GitHub)
-        movement.Move();
-
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            movement.Move(Input.GetAxis("Horizontal"));
+            animator.MovementAnimation(Input.GetAxis("Horizontal"));
+            
+        }
+        else
+        {
+            animator.MovementAnimation(0);
+        }
         if (Input.GetKeyDown(KeyCode.Z))
         {
             weapon.Shoot();
