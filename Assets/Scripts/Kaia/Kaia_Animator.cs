@@ -63,4 +63,16 @@ public class Kaia_Animator : MonoBehaviour
     {
         animator.SetFloat("speed", Mathf.Abs(input));
     }
+
+    public void JumpAnimation(bool isGrounded)
+    {
+        if (!isGrounded)
+        {
+            animator.SetBool("jumping", true);
+        }
+        else
+        {
+            animator.SetBool("jumping", false);
+        }
+    }
 }

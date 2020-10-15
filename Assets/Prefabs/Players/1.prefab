@@ -109,9 +109,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81144eea988f54a49b5fc89f7320cc60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  feetPos: {fileID: 2383377804205370679}
+  checkRaious: 0.35
+  whatGround:
+    serializedVersion: 2
+    m_Bits: 256
+  dashCount: 0
+  dashCD: 2
   healthBar: {fileID: 0}
   maxHealth: 200
   currentHealth: 0
+  dashCdText: {fileID: 0}
   xpBar: {fileID: 0}
   xpToNextLevel: 100
   lvlManager: {fileID: 0}
@@ -135,21 +143,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpForce: 12
-  feetPos: {fileID: 2383377804205370679}
-  checkRaious: 0.35
-  whatGround:
-    serializedVersion: 2
-    m_Bits: 256
   jumpTimeCounter: 0
   jumpTime: 0.35
   isJumping: 0
   extraJumpsValue: 1
   secondJumpForce: 20
-  hasDoubleJump: 0
+  hasDoubleJump: 1
   dashForce: 20
-  dashCd: 2
-  dashCount: 0
-  dashCdText: {fileID: 0}
   dashParticles: {fileID: 501788315113207387, guid: dff1e0d94eac19f4e9ed2904bad8928f,
     type: 3}
 --- !u!114 &2383377803346709133

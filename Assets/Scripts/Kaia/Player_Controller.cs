@@ -18,11 +18,21 @@ public class Player_Controller : MonoBehaviour
     Kaia_AudioController audios;
     Kaia_Animator animator;
 
+    // ---- Jump Variables ----
+    private bool isGrounded;
+    public Transform feetPos;
+    public float checkRaious;
+    public LayerMask whatGround;
+
+    // ---- Dash Variables ----
+    [SerializeField] private float dashCount, dashCD;
+
     // ---- UI Variables ----
 
     public Health_Bar healthBar;
     [SerializeField] int maxHealth;
     public int currentHealth;
+    public Text dashCdText;
 
     public Xp_Bar xpBar;
     public int xpToNextLevel;
@@ -53,7 +63,8 @@ public class Player_Controller : MonoBehaviour
     }
     void Start()
     {
-
+        dashCount = dashCD;
+        dashCdText.text = dashCount.ToString();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         xpBar.slider.maxValue = xpToNextLevel;
@@ -82,11 +93,28 @@ public class Player_Controller : MonoBehaviour
             weapon.Shoot();
         }
 
-        movement.Jump();
+        IsGrounded();
 
+        if (Input.GetButton("Jump"))
+        {
+            movement.Jump(isGrounded);
+        }
         animator.Animation();
-
-        movement.Dash();
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (dashCount <= 0) { dashCount = dashCD; }
+            movement.Dash();
+        }
+        if (dashCount >= 0)
+        {
+            dashCount -= Time.deltaTime;
+            dashCdText.text = dashCount.ToString();
+        }
+        else
+        {
+            movement.cooldownDash();
+            dashCdText.text = dashCD.ToString();
+        }
 
         HealthController();
 
@@ -189,4 +217,10 @@ public class Player_Controller : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
+    public bool IsGrounded()
+    {
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRaious, whatGround); // Booleano para verificar si el jugador toca el suelo.
+        animator.JumpAnimation(isGrounded);
+        return isGrounded; 
+    }
 }
