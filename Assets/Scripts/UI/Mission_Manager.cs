@@ -10,45 +10,66 @@ public class Mission_Manager : MonoBehaviour
     public Image checkDoubleJump;
     public Image checkEnemy;
     public Image checkCoins;
-    GameObject enemy;
     GameObject player;
     [SerializeField] private Text enemyText;
+    [SerializeField] private Text coinsText;
+
+    private int enemyCount;
+    private int collectedCoins;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        enemy = GameObject.FindGameObjectWithTag("Enemy");
         player = GameObject.FindGameObjectWithTag("Player");
         checkDoubleJump.enabled = false;
         checkEnemy.enabled = false;
         checkCoins.enabled = false;
+
+        enemyCount = 0;
+        collectedCoins = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<Player_Controller>().enemyCount <= 8)
-        {
-            enemyText.text = player.GetComponent<Player_Controller>().enemyCount.ToString();
-        }
-
-        if (player.GetComponent<Player_Controller>().enemyCount == 8)
-        {
-            checkEnemy.enabled = true;
-        }
-        if (player.GetComponent<CollectablesManager>().collectedCoins == 45)
-        {
-            checkCoins.enabled = true;
-        }
-        if (player.GetComponent<Movement>().hasDoubleJump == true)
-        {
-            checkDoubleJump.enabled = true;
-        }
         if (checkEnemy.enabled == true && checkCoins.enabled == true && checkDoubleJump.enabled == true)
         {
             SceneManager.LoadScene(4);
         }
     }
+
+    public void UpdateEnemies()
+    {
+        if (enemyCount < 8)
+        {
+            enemyCount++;
+            enemyText.text = enemyCount.ToString();
+        }
+        if(enemyCount >= 8)
+        {
+            checkEnemy.enabled = true;
+        }
+    }
+
+    public void CoinObtained()
+    {
+        if (collectedCoins < 45)
+        {
+            collectedCoins++;
+            coinsText.text = collectedCoins.ToString();
+        }
+        if(collectedCoins >= 45)
+        {
+            checkCoins.enabled = true;
+        }
+    }
+
+    public void DJObtained()
+    {
+        checkDoubleJump.enabled = true;
+    }
+
+
 
 
 

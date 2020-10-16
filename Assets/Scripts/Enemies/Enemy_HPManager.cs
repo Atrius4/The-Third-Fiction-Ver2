@@ -48,8 +48,7 @@ public class Enemy_HPManager : MonoBehaviour
     //La animacion activa esta funcion en un evento.
     public void DestroyOnTime() // evento de animación
     {
-        player.gainXp(10);
-        player.AdEnemy();
+        player.EnemyKilled(10);
         render.enabled = false;
         Enemy_UI.DisableHP();
     }

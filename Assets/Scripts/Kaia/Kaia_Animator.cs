@@ -23,7 +23,7 @@ public class Kaia_Animator : MonoBehaviour
         moveInput = Input.GetAxis("Horizontal");
     }
 
-    public void Animation()
+    public void ShootAnimation()
     {
         // ---- Shooting Animation ----
 

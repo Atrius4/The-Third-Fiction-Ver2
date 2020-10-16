@@ -8,23 +8,17 @@ public class CollectablesManager : MonoBehaviour
     [SerializeField] public int coins, collectedCoins;
     [SerializeField] private Text coinsText, collectedCoinsText;
 
-    
-
-
-   private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Coin"))
-        {
-            coins ++;
-            collectedCoins++;
-            collectedCoinsText.text = collectedCoins.ToString();
-            coinsText.text = coins.ToString();
-        }
-    }
+   
 
     public void BuyItemCost(int itemCost)
     {
         coins -= itemCost;
+        coinsText.text = coins.ToString();
+    }
+
+    public void ObtainedCoins()
+    {
+        coins++;
         coinsText.text = coins.ToString();
     }
 }

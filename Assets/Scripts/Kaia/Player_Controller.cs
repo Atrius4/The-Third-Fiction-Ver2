@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class Player_Controller : MonoBehaviour
 {
+    //---- Singleton ----
 
 
     // Scripts que se comunican con la fachada
@@ -17,6 +18,9 @@ public class Player_Controller : MonoBehaviour
     Distance_Weapon weapon;
     Kaia_AudioController audios;
     Kaia_Animator animator;
+    Level_Manager lvlManager;
+    Mission_Manager misiones;
+    CollectablesManager collectables;
 
     // ---- Jump Variables ----
     private bool isGrounded;
@@ -34,13 +38,7 @@ public class Player_Controller : MonoBehaviour
     public int currentHealth;
     public Text dashCdText;
 
-    public Xp_Bar xpBar;
-    public int xpToNextLevel;
-
-    public Level_Manager lvlManager;
-    public int level;
-    public int enemyCount;
-    public int lifes;
+    private int lifes;
     public Image lifeSprite;
 
 
@@ -60,6 +58,9 @@ public class Player_Controller : MonoBehaviour
         weapon = GetComponent<Distance_Weapon>();
         audios = GetComponent<Kaia_AudioController>();
         animator = GetComponent<Kaia_Animator>();
+        lvlManager = GetComponent<Level_Manager>();
+        misiones = GameObject.Find("UI_Missions").GetComponent<Mission_Manager>();
+        collectables = GetComponent<CollectablesManager>();
     }
     void Start()
     {
@@ -67,9 +68,6 @@ public class Player_Controller : MonoBehaviour
         dashCdText.text = dashCount.ToString();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-        xpBar.slider.maxValue = xpToNextLevel;
-        xpBar.slider.value = 0;
-        lvlManager.SetLevel(level);
         lifeSprite.enabled = true;
         slot1 = GetComponent<Slot>();
     }
@@ -92,6 +90,7 @@ public class Player_Controller : MonoBehaviour
         {
             weapon.Shoot();
         }
+        animator.ShootAnimation();
 
         IsGrounded();
 
@@ -99,7 +98,11 @@ public class Player_Controller : MonoBehaviour
         {
             movement.Jump(isGrounded);
         }
-        animator.Animation();
+        if (Input.GetButtonUp("Jump"))
+        {
+            movement.AlreadyJumped();
+        }
+        
         if (Input.GetKeyDown(KeyCode.X))
         {
             if (dashCount <= 0) { dashCount = dashCD; }
@@ -112,79 +115,43 @@ public class Player_Controller : MonoBehaviour
         }
         else
         {
-            movement.cooldownDash();
+            movement.Resetcooldown();
             dashCdText.text = dashCD.ToString();
         }
-
-        HealthController();
-
-
-        // ---- XP and Lvl Controller ----
-        XpLevel();
     }
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    void HealthController()
+    void Die()
     {
-        if (Input.GetKeyDown(KeyCode.U)) // para testeo
-        {
-            TakeDamage(20);
-        }
-
-        if (currentHealth <= 0 && lifes >= 1)
+        if (lifes >= 1)
         {
             lifes--;
             lifeSprite.enabled = false;
             transform.position = respawnPoint;
             currentHealth = maxHealth;
             healthBar.SetHealth(currentHealth);
+            return;
         }
-
-        if (currentHealth <= 0 && lifes < 1)
+        
+        else
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
-
-    void XpLevel()
-    {
-        if (Input.GetKeyDown(KeyCode.I)) // ----> testeo del sistema de xp y nivel.
-        {
-            gainXp(10);
-        }
-
-        if (xpBar.slider.value >= xpBar.slider.maxValue)
-        {
-            xpBar.slider.value = 0;
-            audios.PlaylvlUpSound();
-            level++;
-            lvlManager.SetLevel(level);
-        }
-
-    }
-
-
-
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         audios.PlayHurtSound();
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
-    public void gainXp(int gainedXp) // esta funcion se llama en el enemyHp Manager
+    public void EnemyKilled(int gainedXp) // esta funcion se llama en el enemyHp Manager
     {
-        xpBar.xp += gainedXp;
+        lvlManager.GainXP(10);
+        misiones.UpdateEnemies();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -201,15 +168,17 @@ public class Player_Controller : MonoBehaviour
         if (other.tag == "PowerUpJump" )
         {
             movement.hasDoubleJump = true;
+            misiones.DJObtained();
             Destroy(other.gameObject);
+        }
+        if(other.tag == "Coin")
+        {
+            collectables.ObtainedCoins();
+            misiones.CoinObtained();
         }
 
     }
 
-    public void AdEnemy() // esta funcion se llama en el enemyHp Manager y se usa para la misión de enemigos.
-    {
-        enemyCount++;
-    }
 
     public void RegainLife()
     {
@@ -217,10 +186,9 @@ public class Player_Controller : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
-    public bool IsGrounded()
+    public void IsGrounded()
     {
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRaious, whatGround); // Booleano para verificar si el jugador toca el suelo.
         animator.JumpAnimation(isGrounded);
-        return isGrounded; 
     }
 }
