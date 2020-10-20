@@ -47,7 +47,7 @@ public class CheckPoint_Controller : MonoBehaviour
             checkpoint.Play();
         }
         checkPointreached = true;
-        
 
+        Memory.Instance.Save();
     }
 }
