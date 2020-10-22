@@ -68,14 +68,14 @@ public class Movement : MonoBehaviour
         Debug.Log(Grounded);
         if (Grounded == true)
         {
-
+            extraJump = extraJumpsValue;
             isJumping = true;
             jumpTimeCounter = jumpTime;
             rb.velocity = Vector2.up * jumpForce;
             Kaia_Audio.PlayJumpSound();
 
         }
-        else if (hasDoubleJump == true && extraJump>0) // Aqui se hace el doble salto.
+        else if (hasDoubleJump == true && extraJump > 0 && Input.GetButtonDown("Jump")) // Aqui se hace el doble salto.
         {
             rb.velocity = Vector2.up * secondJumpForce;
             extraJump--;
@@ -94,7 +94,6 @@ public class Movement : MonoBehaviour
     public void AlreadyJumped()
     {
         jumpTimeCounter = -1;
-        extraJump = extraJumpsValue;
     }
 
     public void Move(float input)

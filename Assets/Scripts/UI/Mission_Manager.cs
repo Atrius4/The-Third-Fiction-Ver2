@@ -15,7 +15,7 @@ public class Mission_Manager : MonoBehaviour
     [SerializeField] private Text coinsText;
 
     private int enemyCount;
-    private int collectedCoins;
+    public int collectedCoins;
 
     // Start is called before the first frame update
     void Awake()
@@ -40,12 +40,12 @@ public class Mission_Manager : MonoBehaviour
 
     public void UpdateEnemies()
     {
-        if (enemyCount < 8)
+        if (enemyCount < 15)
         {
             enemyCount++;
             enemyText.text = enemyCount.ToString();
         }
-        if(enemyCount >= 8)
+        if(enemyCount >= 15)
         {
             checkEnemy.enabled = true;
         }
@@ -53,12 +53,12 @@ public class Mission_Manager : MonoBehaviour
 
     public void CoinObtained()
     {
-        if (collectedCoins < 45)
+        if (collectedCoins < 60)
         {
             collectedCoins++;
             coinsText.text = collectedCoins.ToString();
         }
-        if(collectedCoins >= 45)
+        if(collectedCoins >= 60)
         {
             checkCoins.enabled = true;
         }

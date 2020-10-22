@@ -11,8 +11,8 @@ public class Level_Manager : MonoBehaviour
 
     private Kaia_AudioController audios;
 
-    private int xp = 0;
-    private int lvl = 0;
+    public int xp = 0;
+    public int lvl = 0;
 
 
     private void Awake()
@@ -21,11 +21,9 @@ public class Level_Manager : MonoBehaviour
         xpBar.maxValue = 50;
     }
 
-
     public void SetLevel(int newLevel) // se llama en el player.
     {
         lvlText.text = newLevel.ToString();
-
     }
 
     public void GainXP(int xpValue)

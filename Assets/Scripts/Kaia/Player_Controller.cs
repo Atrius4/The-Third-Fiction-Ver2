@@ -11,6 +11,15 @@ public class Player_Controller : MonoBehaviour
 {
     //---- Singleton ----
 
+    static Player_Controller instance = null;
+    static public Player_Controller Instance
+    {
+        get
+        {
+            if (instance == null) instance = FindObjectOfType<Player_Controller>();
+            return instance;
+        }
+    }
 
     // Scripts que se comunican con la fachada
 
@@ -27,6 +36,7 @@ public class Player_Controller : MonoBehaviour
     public Transform feetPos;
     public float checkRaious;
     public LayerMask whatGround;
+    public bool hasDoubleJump;
 
     // ---- Dash Variables ----
     [SerializeField] private float dashCount, dashCD;
@@ -38,7 +48,7 @@ public class Player_Controller : MonoBehaviour
     public int currentHealth;
     public Text dashCdText;
 
-    private int lifes;
+    public int lifes;
     public Image lifeSprite;
 
 
@@ -48,6 +58,7 @@ public class Player_Controller : MonoBehaviour
 
     // ---- Shop & Inventory Variables ----
     public Slot slot1;
+
 
     // ----------------------------------------------------------- CODE ---------------------------------------------------------------------
 
@@ -61,6 +72,11 @@ public class Player_Controller : MonoBehaviour
         lvlManager = GetComponent<Level_Manager>();
         misiones = GameObject.Find("UI_Missions").GetComponent<Mission_Manager>();
         collectables = GetComponent<CollectablesManager>();
+
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
     void Start()
     {
@@ -118,6 +134,17 @@ public class Player_Controller : MonoBehaviour
             movement.Resetcooldown();
             dashCdText.text = dashCD.ToString();
         }
+        if (hasDoubleJump)
+        {
+            movement.hasDoubleJump = true;
+            misiones.DJObtained();
+
+            if (GameObject.FindGameObjectWithTag("PowerUpJump") != null)
+            {
+                Destroy(GameObject.FindGameObjectWithTag("PowerUpJump").gameObject);
+            }
+        }
+        healthBar.SetHealth(currentHealth);
     }
     void Die()
     {
@@ -170,6 +197,7 @@ public class Player_Controller : MonoBehaviour
             movement.hasDoubleJump = true;
             misiones.DJObtained();
             Destroy(other.gameObject);
+            hasDoubleJump = true;
         }
         if(other.tag == "Coin")
         {

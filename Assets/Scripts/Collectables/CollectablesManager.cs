@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CollectablesManager : MonoBehaviour
 {
     [SerializeField] public int coins, collectedCoins;
-    [SerializeField] private Text coinsText, collectedCoinsText;
+    [SerializeField] public Text coinsText, collectedCoinsText;
 
    
 

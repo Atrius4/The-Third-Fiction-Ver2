@@ -26,16 +26,52 @@ public class Slot : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            UseItem();
+            UseItem1();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            UseItem2();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            UseItem3();
         }
 
     }
 
-    public void UseItem()
+    public void UseItem1()
     {
         foreach (Transform child in transform)
         {
-            if (child.gameObject.CompareTag("HealthPotion"))
+            if (child.gameObject.CompareTag("HealthPotion") && i == 0)
+            {
+                player.RegainLife();
+                GameObject.Destroy(child.gameObject);
+                drinkSound.Play();
+            }
+        }
+    }
+
+    public void UseItem2()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.CompareTag("HealthPotion") && i == 1)
+            {
+                player.RegainLife();
+                GameObject.Destroy(child.gameObject);
+                drinkSound.Play();
+            }
+        }
+    }
+
+    public void UseItem3()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.CompareTag("HealthPotion") && i == 2)
             {
                 player.RegainLife();
                 GameObject.Destroy(child.gameObject);
